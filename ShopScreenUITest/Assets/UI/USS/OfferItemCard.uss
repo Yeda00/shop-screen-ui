@@ -17,6 +17,17 @@
     overflow: hidden;
     flex-shrink: 0;
     -unity-background-scale-mode: stretch-to-fill;
+    opacity: 1;
+    translate: 0px 0px;
+    transition-property: opacity, translate;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+
+/* Entrance animation start state — removed by C# after one frame */
+.offer-card--entering {
+    opacity: 0;
+    translate: 0px 24px;
 }
 
 /* ── Header Spacer (covers the colored top of the frame) ─── */

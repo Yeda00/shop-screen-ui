@@ -182,11 +182,13 @@ namespace Shop
                 return;
             }
 
+            int cardIndex = 0;
             foreach (var item in items)
             {
                 if (item == null) continue;
 
                 VisualElement card;
+                string innerName;
 
                 if (_activeTab == ShopTab.Offers)
                 {
@@ -195,6 +197,7 @@ namespace Shop
                         item,
                         buyButtonSprite,
                         OnItemPurchased);
+                    innerName = "offer-card";
                 }
                 else
                 {
@@ -204,9 +207,21 @@ namespace Shop
                         watchAdIconSprite,
                         buyButtonSprite,
                         OnItemPurchased);
+                    innerName = "item-card";
                 }
 
+                // Entrance animation: start hidden/translated, then remove class after a staggered delay
+                var innerCard = card.Q<VisualElement>(innerName);
+                innerCard?.AddToClassList(innerName + "--entering");
                 _itemsGrid.Add(card);
+
+                long delay = cardIndex * 60L;
+                var captured = innerCard;
+                var enterClass = innerName + "--entering";
+                _itemsGrid.schedule.Execute(() => captured?.RemoveFromClassList(enterClass))
+                                   .StartingIn(delay + 16L);
+
+                cardIndex++;
             }
         }
 

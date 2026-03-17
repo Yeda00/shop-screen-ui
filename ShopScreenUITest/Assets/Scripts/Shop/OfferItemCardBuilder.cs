@@ -17,6 +17,7 @@ namespace Shop
         public static VisualElement Build(
             VisualTreeAsset template,
             ShopItemData data,
+            Sprite buyButtonSprite,
             Action<ShopItemData> onBuyClicked)
         {
             if (template == null)
@@ -28,13 +29,25 @@ namespace Shop
             var card = template.Instantiate();
 
             SetFrame(card, data);
+            SetTitle(card, data);
             SetLayout(card, data);
-            SetBuyButton(card, data, onBuyClicked);
+            SetBuyButton(card, data, buyButtonSprite, onBuyClicked);
 
             return card;
         }
 
         // ── Helpers ──────────────────────────────────────────────────────
+
+        private static void SetTitle(VisualElement card, ShopItemData data)
+        {
+            var title = card.Q<Label>("offer-title");
+            if (title == null) return;
+
+            title.text = string.IsNullOrEmpty(data.cardTitle) ? string.Empty : data.cardTitle;
+
+            // Star Pass: 22px | demais packs: 18px
+            title.style.fontSize = data.offerCardType == OfferCardType.StarPass ? 22f : 18f;
+        }
 
         private static void SetFrame(VisualElement card, ShopItemData data)
         {
@@ -84,10 +97,13 @@ namespace Shop
                 labelEl.text = label ?? string.Empty;
         }
 
-        private static void SetBuyButton(VisualElement card, ShopItemData data, Action<ShopItemData> onBuyClicked)
+        private static void SetBuyButton(VisualElement card, ShopItemData data, Sprite buyButtonSprite, Action<ShopItemData> onBuyClicked)
         {
             var buyBtn = card.Q<Button>("buy-btn");
             if (buyBtn == null) return;
+
+            if (buyButtonSprite != null)
+                buyBtn.style.backgroundImage = new StyleBackground(buyButtonSprite);
 
             buyBtn.text = string.IsNullOrEmpty(data.priceDisplay) ? "Comprar" : data.priceDisplay;
             buyBtn.clicked += () => onBuyClicked?.Invoke(data);

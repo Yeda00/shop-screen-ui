@@ -70,6 +70,9 @@ namespace Shop
         [Tooltip("Layout variant. Set for items in the Offers tab only.")]
         public OfferCardType offerCardType;
 
+        [Tooltip("Título exibido no header colorido do card (ex: STAR PASS, STARTER PACK).")]
+        public string cardTitle;
+
         [Tooltip("Frame image used as full card background (Offers tab).")]
         public Sprite frameSprite;
 

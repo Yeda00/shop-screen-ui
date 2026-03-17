@@ -24,6 +24,7 @@ namespace Shop
             VisualTreeAsset template,
             ShopItemData data,
             Sprite watchIconSprite,
+            Sprite buyButtonSprite,
             Action<ShopItemData> onBuyClicked)
         {
             if (template == null)
@@ -36,7 +37,7 @@ namespace Shop
 
             SetImage(card, data);
             SetCurrencyRow(card, data);
-            SetBuyButton(card, data, watchIconSprite, onBuyClicked);
+            SetBuyButton(card, data, watchIconSprite, buyButtonSprite, onBuyClicked);
 
             return card;
         }
@@ -45,11 +46,14 @@ namespace Shop
 
         private static void SetImage(VisualElement card, ShopItemData data)
         {
-            var cardImage = card.Q<VisualElement>("card-image");
-            if (cardImage == null) return;
+            // O frame sprite (Frame_ShopMoney.png / Frame_ShopCoins.png) é aplicado
+            // como backgroundImage do root do card — o frame integra visualmente
+            // o produto, a strip de moeda e o fundo bege, sem precisar de card-image.
+            var itemCard = card.Q<VisualElement>("item-card");
+            if (itemCard == null) return;
 
             if (data.itemSprite != null)
-                cardImage.style.backgroundImage = new StyleBackground(data.itemSprite);
+                itemCard.style.backgroundImage = new StyleBackground(data.itemSprite);
         }
 
         private static void SetCurrencyRow(VisualElement card, ShopItemData data)
@@ -60,23 +64,32 @@ namespace Shop
                     ? data.amount.ToString("N0")
                     : data.amountDisplay;
 
-            var coinIcon = card.Q<VisualElement>("coin-icon");
-            if (coinIcon != null && data.currencyIconSprite != null)
-                coinIcon.style.backgroundImage = new StyleBackground(data.currencyIconSprite);
+            // Adiciona classe modificadora ao coin-row para posicionamento
+            // independente por tab — ajuste top/padding no USS sem interferência.
+            var coinRow = card.Q<VisualElement>("coin-row");
+            if (coinRow != null)
+            {
+                coinRow.AddToClassList(data.tab == ShopTab.Money
+                    ? "item-card__coin-row--money"
+                    : "item-card__coin-row--coins");
+            }
         }
 
         private static void SetBuyButton(
             VisualElement card,
             ShopItemData data,
             Sprite watchIconSprite,
+            Sprite buyButtonSprite,
             Action<ShopItemData> onBuyClicked)
         {
             var buyBtn = card.Q<Button>("buy-btn");
             if (buyBtn == null) return;
 
+            if (buyButtonSprite != null)
+                buyBtn.style.backgroundImage = new StyleBackground(buyButtonSprite);
+
             if (data.purchaseType == PurchaseType.WatchAd)
             {
-                // Insert small video icon before the text
                 if (watchIconSprite != null)
                 {
                     var icon = new VisualElement();

@@ -35,7 +35,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 16px 8px 20px;
-    height: 64px;
+    height: 65px;
 }
 
 .shop-header__left {
@@ -68,6 +68,9 @@
      * SVG layout (Group 570 / Group 620):
      *   left  ~38% = icon overhang  → padding-left accounts for this
      *   right ~14% = + button area  → padding-right keeps text from covering it
+     *
+     * NOTA SVG: scale-to-fit evita distorção em VectorImage complexo.
+     * Se o SVG ainda aparecer bugado, considere exportar como PNG/Sprite.
      */
     padding: 2px 34px 2px 46px;
     margin-right: 8px;
@@ -75,7 +78,7 @@
     min-width: 130px;
     border-width: 0;
     background-color: transparent;
-    -unity-background-scale-mode: stretch-to-fill;
+    -unity-background-scale-mode: scale-to-fit;
 }
 
 .wallet__amount {
@@ -154,35 +157,39 @@
 
 .tab-nav {
     flex-direction: column;
-    width: 130px;
-    margin-right: 14px;
+    width: 154px;
+    margin-right: 18px;
     justify-content: flex-start;
     padding-top: 4px;
     flex-shrink: 0;
 }
 
 .tab-btn {
-    background-color: rgba(228, 221, 181, 0.35);
+    /* Sprite Frame_HUD Buttons.png aplicado via C# */
+    background-color: transparent;
+    border-width: 0;
+    -unity-background-scale-mode: stretch-to-fill;
     color: var(--shop-color-brown);
     font-size: var(--shop-font-md);
     -unity-font-style: bold;
-    border-radius: var(--shop-radius-md);
     margin-bottom: var(--shop-spacing-sm);
     padding: 10px var(--shop-spacing-md);
-    border-width: 0;
+    width: 148px;
+    height: 38px;
     -unity-text-align: middle-center;
-    opacity: 0.55;
-    transition-property: opacity, background-color;
+    /* Inativo: semi-transparente */
+    opacity: 0.5;
+    transition-property: opacity;
     transition-duration: 0.15s;
 }
 
 .tab-btn--active {
-    background-color: rgba(228, 221, 181, 0.92);
+    /* Ativo: opacidade total */
     opacity: 1.0;
 }
 
 .tab-btn:hover {
-    opacity: 0.8;
+    opacity: 0.75;
 }
 
 /* ── Items Container (ScrollView) ────────────────────────── */

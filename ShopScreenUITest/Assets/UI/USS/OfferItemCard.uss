@@ -24,6 +24,21 @@
 .offer-card__header-spacer {
     height: 58px;
     flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Título do pack (STAR PASS / STARTER PACK / PREMIUM PACK) */
+
+.offer-card__title {
+    color: white;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    /* font-size definido via C# (22px Star Pass / 18px demais) */
+    white-space: normal;
+    /* Limita à largura do header para não extrapolar */
+    width: 100%;
+    padding: 0 6px;
 }
 
 /* ── Star Pass Content ───────────────────────────────────── */
@@ -77,10 +92,10 @@
     flex-shrink: 0;
     margin: 0 8px 8px 8px;
     padding: 6px 8px;
-    background-color: var(--shop-color-green);
-    border-radius: var(--shop-radius-md);
-    border-width: 1px;
-    border-color: var(--shop-color-green-dark);
+    /* Sprite Buttom Frame_Green.png aplicado via C# — sem CSS de cor */
+    background-color: transparent;
+    border-width: 0;
+    -unity-background-scale-mode: stretch-to-fill;
     color: white;
     font-size: var(--shop-font-sm);
     -unity-font-style: bold;
@@ -88,9 +103,9 @@
 }
 
 .offer-card__buy-btn:hover {
-    background-color: rgb(55, 175, 60);
+    background-color: rgba(255, 255, 255, 0.12);
 }
 
 .offer-card__buy-btn:active {
-    background-color: var(--shop-color-green-dark);
+    background-color: rgba(0, 0, 0, 0.15);
 }

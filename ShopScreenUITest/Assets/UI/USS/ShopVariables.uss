@@ -11,7 +11,8 @@
     --shop-color-green:      rgb(43, 154, 47);    /* Button Green   */
     --shop-color-green-dark: rgb(37, 118, 26);    /* Button Border  */
     --shop-color-tan:        rgb(201, 194, 159);  /* Card strip bg  */
-    --shop-color-overlay:    rgba(0, 0, 0, 0.65); /* Blur overlay   */
+    --shop-color-overlay:    rgba(0, 0, 0, 0.80); /* Blur overlay   */
+    --shop-color-green-hi:   rgb(127, 234, 61);   /* Button top glow */
 
     /* --- Spacing --- */
     --shop-spacing-xs: 4px;

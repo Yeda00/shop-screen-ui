@@ -1,6 +1,7 @@
 /* ============================================================
    Shop Item Card - Component Styles
-   Reusable card for shop items (coins / money / offers)
+   Layout: frame sprite como background. coin-row e footer
+   são position:absolute → ajuste independente sem interferência.
    ============================================================ */
 
 @import url("ShopVariables.uss");
@@ -9,56 +10,75 @@
 
 .item-card {
     width: 160px;
-    height: 148px;
+    height: 188px;
     margin: 5px;
     border-radius: var(--shop-radius-lg);
-    flex-direction: column;
-    background-color: var(--shop-color-beige);
     overflow: hidden;
     flex-shrink: 0;
+    -unity-background-scale-mode: stretch-to-fill;
+    background-color: transparent;
 }
 
-/* ── Card Image Area ─────────────────────────────────────── */
-
-.item-card__image {
-    flex: 1;
-    -unity-background-scale-mode: scale-and-crop;
-    background-color: rgba(0, 0, 0, 0.08);
-}
-
-/* ── Card Footer ─────────────────────────────────────────── */
-
-.item-card__footer {
-    flex-direction: column;
-    padding: 5px 6px 6px 6px;
-    background-color: var(--shop-color-beige);
-}
-
-/* ── Coin Info Row ───────────────────────────────────────── */
+/* ── Strip de valor (coin-row) — layout base ─────────────── */
 
 .item-card__coin-row {
+    position: absolute;
+    height: 30px;
     flex-direction: row;
     align-items: center;
-    background-color: var(--shop-color-tan);
-    border-radius: var(--shop-radius-sm);
-    padding: 2px 8px 2px 6px;
-    margin-bottom: 5px;
+    justify-content: center;
+    background-color: transparent;
 }
 
-.item-card__coin-icon {
-    width: 18px;
-    height: 18px;
-    margin-right: 5px;
-    flex-shrink: 0;
-    -unity-background-scale-mode: scale-to-fit;
+/*
+ * ── Coins tab ──────────────────────────────────────────────
+ * Ajuste AQUI para os cards de Coins (Frame_ShopCoins.png).
+ * top      → posição vertical do texto
+ * left/right → largura da área do texto
+ * padding-left → recuo horizontal (não sobrepor ícone do frame)
+ */
+.item-card__coin-row--coins {
+    top: 85px;
+    left: 15px;
+    right: 25px;
+    padding-left: 40px;
+    padding-right: 8px;
+}
+
+/*
+ * ── Money tab ──────────────────────────────────────────────
+ * Ajuste AQUI para os cards de Money (Frame_ShopMoney.png).
+ * Valores independentes dos Coins — não interferem entre si.
+ */
+.item-card__coin-row--money {
+    top: 82px;
+    left: 10px;
+    right: 10px;
+    padding-left: 40px;
+    padding-right: 8px;
 }
 
 .item-card__amount {
     color: var(--shop-color-brown);
-    font-size: var(--shop-font-sm);
-    -unity-text-align: middle-left;
+    font-size: 12.8px;
+    -unity-text-align: middle-center;
     -unity-font-style: bold;
     flex: 1;
+}
+
+/* ── Footer (apenas botão) ───────────────────────────────── */
+
+.item-card__footer {
+    position: absolute;
+    /*
+     * ↕ Ajuste APENAS este `bottom` para mover o botão verticalmente
+     *   sem afetar o texto do valor.
+     */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 10px 10px 10px;
+    background-color: transparent;
 }
 
 /* ── Buy Button ──────────────────────────────────────────── */
@@ -67,32 +87,32 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: var(--shop-color-green);
-    border-radius: var(--shop-radius-md);
-    border-width: 1px;
-    border-color: var(--shop-color-green-dark);
-    padding: 5px 8px;
-    color: var(--shop-color-beige);
-    font-size: var(--shop-font-xs);
+    /* Sprite Buttom Frame_Green.png aplicado via C# — sem CSS de cor */
+    background-color: transparent;
+    border-width: 0;
+    -unity-background-scale-mode: stretch-to-fill;
+    padding: 6px 8px;
+    color: white;
+    font-size: var(--shop-font-sm);
     -unity-font-style: bold;
     -unity-text-align: middle-center;
 }
 
 .item-card__buy-btn:hover {
-    background-color: rgb(55, 175, 60);
+    background-color: rgba(255, 255, 255, 0.12);
 }
 
 .item-card__buy-btn:active {
-    background-color: var(--shop-color-green-dark);
+    background-color: rgba(0, 0, 0, 0.15);
 }
 
 /* ── Watch Ad Button (modifier) ──────────────────────────── */
 
 .item-card__buy-btn--watch {
-    /* same base styles, icon visible handled in C# */
+    /* herda estilos base do buy-btn */
 }
 
-/* ── Watch Icon (injected by builder for ad items) ───────── */
+/* ── Watch Icon (injetado pelo builder em itens WatchAd) ─── */
 
 .item-card__watch-icon {
     width: 16px;

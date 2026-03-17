@@ -10,8 +10,10 @@
     -->
     <ui:VisualElement name="offer-card" class="offer-card">
 
-        <!-- Transparent spacer that covers the colored header region of the frame -->
-        <ui:VisualElement name="header-spacer" class="offer-card__header-spacer" />
+        <!-- Header colorido do frame: contém o título do pack -->
+        <ui:VisualElement name="header-spacer" class="offer-card__header-spacer">
+            <ui:Label name="offer-title" text="" class="offer-card__title" />
+        </ui:VisualElement>
 
         <!-- ── Star Pass layout ──────────────────────────────── -->
         <ui:VisualElement name="star-pass-content" class="offer-card__star-pass-content">

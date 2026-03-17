@@ -35,6 +35,8 @@ namespace Shop
         [Header("Button Icons")]
         [SerializeField] private Sprite closeBtnSprite;
         [SerializeField] private Sprite watchAdIconSprite;
+        [SerializeField] private Sprite buyButtonSprite;
+        [SerializeField] private Sprite tabButtonSprite;
 
         [Header("Wallet Values (runtime)")]
         [SerializeField] private int initialMoneyAmount = 120000;
@@ -191,6 +193,7 @@ namespace Shop
                     card = OfferItemCardBuilder.Build(
                         offerItemCardTemplate,
                         item,
+                        buyButtonSprite,
                         OnItemPurchased);
                 }
                 else
@@ -199,6 +202,7 @@ namespace Shop
                         shopItemCardTemplate,
                         item,
                         watchAdIconSprite,
+                        buyButtonSprite,
                         OnItemPurchased);
                 }
 
@@ -245,6 +249,14 @@ namespace Shop
             {
                 _closeBtn.style.backgroundImage = new StyleBackground(closeBtnSprite);
                 _closeBtn.text = "";
+            }
+
+            if (tabButtonSprite != null)
+            {
+                var bg = new StyleBackground(tabButtonSprite);
+                if (_tabOffersBtn != null) _tabOffersBtn.style.backgroundImage = bg;
+                if (_tabMoneyBtn  != null) _tabMoneyBtn.style.backgroundImage  = bg;
+                if (_tabCoinsBtn  != null) _tabCoinsBtn.style.backgroundImage  = bg;
             }
         }
 

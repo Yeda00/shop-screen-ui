@@ -21,6 +21,7 @@ MonoBehaviour:
   itemSprite: {fileID: 1136746273091791479, guid: 01fa94841fd6043ecb4277b5e694021e, type: 3}
   currencyIconSprite: {fileID: -9032091246484857911, guid: 9fc62dc9769c24bb19951e3d4ee1470b, type: 3}
   offerCardType: 2
+  cardTitle: PREMIUM PACK
   frameSprite: {fileID: -3992403332652740901, guid: cc1247928ef6f4aeaad25af27d2702c6, type: 3}
   centerSprite: {fileID: 0}
   row1Icon: {fileID: 8432977722802046756, guid: 6d77c6948a43d4540b6c6591a6eb3bd2, type: 3}

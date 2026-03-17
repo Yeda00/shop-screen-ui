@@ -1,0 +1,205 @@
+/* ============================================================
+   Shop Screen - Layout & Component Styles
+   Target: Unity UI Toolkit (Landscape)
+   ============================================================ */
+
+@import url("ShopVariables.uss");
+
+/* ── Root ────────────────────────────────────────────────── */
+
+.shop-root {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    flex-direction: column;
+}
+
+/* ── Background ──────────────────────────────────────────── */
+
+.shop-background {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    -unity-background-scale-mode: scale-and-crop;
+    background-color: rgb(37, 80, 55); /* fallback if sprite not set */
+}
+
+.shop-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--shop-color-overlay);
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+
+.shop-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px 8px 20px;
+    height: 64px;
+}
+
+.shop-header__left {
+    flex-direction: row;
+    align-items: center;
+}
+
+.shop-header__right {
+    flex-direction: row;
+    align-items: center;
+}
+
+/* ── Title ───────────────────────────────────────────────── */
+
+.shop-title {
+    color: var(--shop-color-beige);
+    font-size: var(--shop-font-xl);
+    -unity-font-style: bold;
+    -unity-text-align: middle-left;
+    letter-spacing: 2px;
+    /* Baloo font: assign via -unity-font-definition in code or set font asset */
+}
+
+/* ── Wallet ──────────────────────────────────────────────── */
+
+.wallet {
+    flex-direction: row;
+    align-items: center;
+    border-radius: var(--shop-radius-xl);
+    padding: 4px 8px 4px 6px;
+    margin-right: 10px;
+    min-width: 110px;
+    -unity-background-scale-mode: stretch-to-fill;
+    background-color: rgba(0, 0, 0, 0.35);
+    border-width: 1px;
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.wallet__icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 6px;
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.wallet__amount {
+    color: var(--shop-color-beige);
+    font-size: 13px;
+    -unity-text-align: middle-left;
+    -unity-font-style: bold;
+    flex: 1;
+    margin-right: 4px;
+}
+
+.wallet__add-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 11px;
+    background-color: rgb(41, 128, 185);
+    color: white;
+    font-size: 16px;
+    -unity-font-style: bold;
+    padding: 0;
+    border-width: 0;
+    -unity-text-align: middle-center;
+    flex-shrink: 0;
+}
+
+.wallet__add-btn:hover {
+    background-color: rgb(52, 152, 219);
+}
+
+.wallet__add-btn:active {
+    background-color: rgb(31, 97, 141);
+}
+
+/* ── Close Button ────────────────────────────────────────── */
+
+.close-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
+    background-color: rgb(192, 57, 43);
+    color: white;
+    font-size: 20px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    border-width: 0;
+    padding: 0;
+    margin-left: 4px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.close-btn:hover {
+    background-color: rgb(231, 76, 60);
+}
+
+.close-btn:active {
+    background-color: rgb(169, 50, 38);
+}
+
+/* ── Divider ─────────────────────────────────────────────── */
+
+.shop-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.12);
+    margin: 0 16px;
+}
+
+/* ── Main Content ────────────────────────────────────────── */
+
+.shop-content {
+    flex-direction: row;
+    flex: 1;
+    padding: 8px 16px 12px 16px;
+    overflow: hidden;
+}
+
+/* ── Tab Navigation ──────────────────────────────────────── */
+
+.tab-nav {
+    flex-direction: column;
+    width: 130px;
+    margin-right: 14px;
+    justify-content: flex-start;
+    padding-top: 4px;
+    flex-shrink: 0;
+}
+
+.tab-btn {
+    background-color: rgba(228, 221, 181, 0.35);
+    color: var(--shop-color-brown);
+    font-size: var(--shop-font-md);
+    -unity-font-style: bold;
+    border-radius: var(--shop-radius-md);
+    margin-bottom: var(--shop-spacing-sm);
+    padding: 10px var(--shop-spacing-md);
+    border-width: 0;
+    -unity-text-align: middle-center;
+    opacity: 0.55;
+    transition-property: opacity, background-color;
+    transition-duration: 0.15s;
+}
+
+.tab-btn--active {
+    background-color: rgba(228, 221, 181, 0.92);
+    opacity: 1.0;
+}
+
+.tab-btn:hover {
+    opacity: 0.8;
+}
+
+/* ── Items Container (ScrollView) ────────────────────────── */
+
+.items-scroll {
+    flex: 1;
+    overflow: hidden;
+}
+
+.items-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 4px;
+}

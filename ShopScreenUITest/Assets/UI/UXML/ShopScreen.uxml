@@ -1,0 +1,78 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="../USS/ShopScreen.uss" />
+
+    <!--
+        ShopScreen – Main landscape shop screen.
+        Managed by ShopScreenController.cs (extends UIScreenBase).
+
+        Layout:
+          ┌──────────────────────────────────────────────────┐
+          │  SHOP          [💵 120.000 +] [🪙 120.000 +] [✕]│  ← Header
+          ├─────────────────────────────────────────────────-┤
+          │ [OFFERS]  │  [card] [card] [card] [card]         │
+          │ [MONEY ]  │  [card] [card] [card] [card]         │
+          │ [COINS ]  │                                      │
+          └──────────────────────────────────────────────────┘
+    -->
+    <ui:VisualElement name="shop-root" class="shop-root">
+
+        <!-- ── Background + Overlay ─────────────────────── -->
+        <ui:VisualElement name="shop-background" class="shop-background">
+            <ui:VisualElement name="shop-overlay" class="shop-overlay" />
+        </ui:VisualElement>
+
+        <!-- ── Header ───────────────────────────────────── -->
+        <ui:VisualElement name="shop-header" class="shop-header">
+
+            <!-- Left: Title -->
+            <ui:VisualElement class="shop-header__left">
+                <ui:Label name="shop-title" text="SHOP" class="shop-title" />
+            </ui:VisualElement>
+
+            <!-- Right: Wallets + Close -->
+            <ui:VisualElement class="shop-header__right">
+
+                <!-- Money Wallet -->
+                <ui:VisualElement name="money-wallet" class="wallet">
+                    <ui:VisualElement name="money-icon" class="wallet__icon" />
+                    <ui:Label name="money-amount" text="0" class="wallet__amount" />
+                    <ui:Button name="add-money-btn" text="+" class="wallet__add-btn" />
+                </ui:VisualElement>
+
+                <!-- Coin Wallet -->
+                <ui:VisualElement name="coin-wallet" class="wallet">
+                    <ui:VisualElement name="coin-icon" class="wallet__icon" />
+                    <ui:Label name="coin-amount" text="0" class="wallet__amount" />
+                    <ui:Button name="add-coin-btn" text="+" class="wallet__add-btn" />
+                </ui:VisualElement>
+
+                <!-- Close -->
+                <ui:Button name="close-btn" text="✕" class="close-btn" />
+
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Separator -->
+        <ui:VisualElement class="shop-divider" />
+
+        <!-- ── Main Content ──────────────────────────────── -->
+        <ui:VisualElement name="shop-content" class="shop-content">
+
+            <!-- Tab Sidebar -->
+            <ui:VisualElement name="tab-nav" class="tab-nav">
+                <ui:Button name="tab-offers" text="OFFERS" class="tab-btn" />
+                <ui:Button name="tab-money"  text="MONEY"  class="tab-btn" />
+                <ui:Button name="tab-coins"  text="COINS"  class="tab-btn tab-btn--active" />
+            </ui:VisualElement>
+
+            <!-- Items ScrollView – content populated by ShopScreenController -->
+            <ui:ScrollView name="items-scroll" class="items-scroll"
+                           mode="Vertical"
+                           vertical-scroller-visibility="Hidden"
+                           horizontal-scroller-visibility="Hidden">
+                <ui:VisualElement name="items-grid" class="items-grid" />
+            </ui:ScrollView>
+
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

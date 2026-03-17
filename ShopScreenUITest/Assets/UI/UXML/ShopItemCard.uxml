@@ -1,0 +1,28 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="../USS/ShopItemCard.uss" />
+
+    <!--
+        ShopItemCard – reusable card template.
+        Populated procedurally by ShopItemCardBuilder.cs.
+        Images and text are set at runtime via C# code.
+    -->
+    <ui:VisualElement name="item-card" class="item-card">
+
+        <!-- Product image (coin stack / money stack / offer artwork) -->
+        <ui:VisualElement name="card-image" class="item-card__image" />
+
+        <!-- Footer: currency info row + CTA button -->
+        <ui:VisualElement name="card-footer" class="item-card__footer">
+
+            <!-- Currency icon + amount -->
+            <ui:VisualElement name="coin-row" class="item-card__coin-row">
+                <ui:VisualElement name="coin-icon" class="item-card__coin-icon" />
+                <ui:Label name="amount-label" text="0" class="item-card__amount" />
+            </ui:VisualElement>
+
+            <!-- Purchase / Watch Ad CTA -->
+            <ui:Button name="buy-btn" text="" class="item-card__buy-btn" />
+
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

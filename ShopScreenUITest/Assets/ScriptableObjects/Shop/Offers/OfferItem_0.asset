@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea35be169f940eeae443c05e5fa054, type: 3}
+  m_Name: OfferItem_0
+  m_EditorClassIdentifier: Assembly-CSharp::Shop.ShopItemData
+  productId: offer_starter
+  tab: 0
+  amount: 5000
+  amountDisplay: Starter Pack
+  purchaseType: 0
+  priceDisplay: R$ 9,99
+  itemSprite: {fileID: 870655926483219700, guid: 37b9208f5682543f2a91fae1c865f601, type: 3}
+  currencyIconSprite: {fileID: -9032091246484857911, guid: 9fc62dc9769c24bb19951e3d4ee1470b, type: 3}

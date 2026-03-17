@@ -1,0 +1,103 @@
+/* ============================================================
+   Shop Item Card - Component Styles
+   Reusable card for shop items (coins / money / offers)
+   ============================================================ */
+
+@import url("ShopVariables.uss");
+
+/* ── Card Container ──────────────────────────────────────── */
+
+.item-card {
+    width: 160px;
+    height: 148px;
+    margin: 5px;
+    border-radius: var(--shop-radius-lg);
+    flex-direction: column;
+    background-color: var(--shop-color-beige);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* ── Card Image Area ─────────────────────────────────────── */
+
+.item-card__image {
+    flex: 1;
+    -unity-background-scale-mode: scale-and-crop;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ── Card Footer ─────────────────────────────────────────── */
+
+.item-card__footer {
+    flex-direction: column;
+    padding: 5px 6px 6px 6px;
+    background-color: var(--shop-color-beige);
+}
+
+/* ── Coin Info Row ───────────────────────────────────────── */
+
+.item-card__coin-row {
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--shop-color-tan);
+    border-radius: var(--shop-radius-sm);
+    padding: 2px 8px 2px 6px;
+    margin-bottom: 5px;
+}
+
+.item-card__coin-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.item-card__amount {
+    color: var(--shop-color-brown);
+    font-size: var(--shop-font-sm);
+    -unity-text-align: middle-left;
+    -unity-font-style: bold;
+    flex: 1;
+}
+
+/* ── Buy Button ──────────────────────────────────────────── */
+
+.item-card__buy-btn {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--shop-color-green);
+    border-radius: var(--shop-radius-md);
+    border-width: 1px;
+    border-color: var(--shop-color-green-dark);
+    padding: 5px 8px;
+    color: var(--shop-color-beige);
+    font-size: var(--shop-font-xs);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.item-card__buy-btn:hover {
+    background-color: rgb(55, 175, 60);
+}
+
+.item-card__buy-btn:active {
+    background-color: var(--shop-color-green-dark);
+}
+
+/* ── Watch Ad Button (modifier) ──────────────────────────── */
+
+.item-card__buy-btn--watch {
+    /* same base styles, icon visible handled in C# */
+}
+
+/* ── Watch Icon (injected by builder for ad items) ───────── */
+
+.item-card__watch-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}

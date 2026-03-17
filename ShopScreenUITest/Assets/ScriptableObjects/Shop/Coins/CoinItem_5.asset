@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea35be169f940eeae443c05e5fa054, type: 3}
+  m_Name: CoinItem_5
+  m_EditorClassIdentifier: Assembly-CSharp::Shop.ShopItemData
+  productId: coins_50000
+  tab: 2
+  amount: 50000
+  amountDisplay: 50.000
+  purchaseType: 0
+  priceDisplay: R$ 119,99
+  itemSprite: {fileID: -2887618745029888052, guid: eb1982d448a2e4f0c91a50ba722f8a4b, type: 3}
+  currencyIconSprite: {fileID: -9032091246484857911, guid: 9fc62dc9769c24bb19951e3d4ee1470b, type: 3}

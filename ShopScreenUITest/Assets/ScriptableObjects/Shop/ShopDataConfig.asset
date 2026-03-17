@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a4ef6b215ca4f818cbe535c3151a8a, type: 3}
+  m_Name: ShopDataConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Shop.ShopDataConfig
+  offersItems:
+  - {fileID: 11400000, guid: 85c2e1c64d382481d8631349ac798dd9, type: 2}
+  - {fileID: 11400000, guid: 6d4a692fe98c4443b91beddc507a97e2, type: 2}
+  - {fileID: 11400000, guid: cce67f3752c414caeaf90be34d5984b7, type: 2}
+  moneyItems:
+  - {fileID: 11400000, guid: 44a40ccd63ab64338967ff6f93cb7db3, type: 2}
+  - {fileID: 11400000, guid: 981fe3a18859d4ea4b09dbf91512c086, type: 2}
+  - {fileID: 11400000, guid: 1d311cae102ec4ec586d1a685bcb24e0, type: 2}
+  - {fileID: 11400000, guid: a245bb033358048e4a98460e18ee95ce, type: 2}
+  - {fileID: 11400000, guid: 06e1d9156b69e4dfbb901aa404c69764, type: 2}
+  coinItems:
+  - {fileID: 11400000, guid: fedc0f3a1a7f34a2d88c9cd1e3f21f91, type: 2}
+  - {fileID: 11400000, guid: 4ce82f89762f94b86900a222a7488810, type: 2}
+  - {fileID: 11400000, guid: c8dbf170223754a6c8c9134489cbc02b, type: 2}
+  - {fileID: 11400000, guid: 22781c61c2c0247348de80aacdd7e0c5, type: 2}
+  - {fileID: 11400000, guid: 7b1ab83ed1cd04b57885be9bb42e5ee7, type: 2}
+  - {fileID: 11400000, guid: 6f229370214a3483cb1d8d2e75e39c29, type: 2}
+  - {fileID: 11400000, guid: 56b01ac83f7c24955aae024aa8479e10, type: 2}

@@ -1,0 +1,34 @@
+/* ============================================================
+   Shop Screen - Design Tokens
+   Colors extracted from Figma: Shop-Screen---Test
+   ============================================================ */
+
+:root {
+    /* --- Color Palette --- */
+    --shop-color-brown:      rgb(137, 86, 55);   /* Marron Padrão  */
+    --shop-color-beige:      rgb(228, 221, 181);  /* Bege Creme     */
+    --shop-color-brown-dark: rgb(95, 49, 36);     /* Marron Sombra  */
+    --shop-color-green:      rgb(43, 154, 47);    /* Button Green   */
+    --shop-color-green-dark: rgb(37, 118, 26);    /* Button Border  */
+    --shop-color-tan:        rgb(201, 194, 159);  /* Card strip bg  */
+    --shop-color-overlay:    rgba(0, 0, 0, 0.65); /* Blur overlay   */
+
+    /* --- Spacing --- */
+    --shop-spacing-xs: 4px;
+    --shop-spacing-sm: 8px;
+    --shop-spacing-md: 12px;
+    --shop-spacing-lg: 16px;
+
+    /* --- Border Radius --- */
+    --shop-radius-sm:  4px;
+    --shop-radius-md:  8px;
+    --shop-radius-lg:  11px;
+    --shop-radius-xl:  20px;
+
+    /* --- Font Sizes --- */
+    --shop-font-xs:   11px;
+    --shop-font-sm:   13px;
+    --shop-font-md:   16px;
+    --shop-font-lg:   24px;
+    --shop-font-xl:   28px;
+}

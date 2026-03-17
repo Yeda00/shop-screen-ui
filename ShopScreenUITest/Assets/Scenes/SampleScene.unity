@@ -381,6 +381,7 @@ MonoBehaviour:
   watchAdIconSprite: {fileID: -835913887158353787, guid: 0d218d0b31fcc4a18934b85c78208b1b, type: 3}
   buyButtonSprite: {fileID: 3758585067948155059, guid: db14d91529e98461cac303a210422e38, type: 3}
   tabButtonSprite: {fileID: -6500375927547481642, guid: 2153c1100071d4a87b406bda2f47f35f, type: 3}
+  nextTabButtonSprite: {fileID: -835913887158353787, guid: 0d218d0b31fcc4a18934b85c78208b1b, type: 3}
   initialMoneyAmount: 120000
   initialCoinAmount: 120000
 --- !u!114 &878895130

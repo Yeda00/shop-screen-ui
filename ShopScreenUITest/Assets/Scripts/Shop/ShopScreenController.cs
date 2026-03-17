@@ -37,6 +37,7 @@ namespace Shop
         [SerializeField] private Sprite watchAdIconSprite;
         [SerializeField] private Sprite buyButtonSprite;
         [SerializeField] private Sprite tabButtonSprite;
+        [SerializeField] private Sprite nextTabButtonSprite;
 
         [Header("Wallet Values (runtime)")]
         [SerializeField] private int initialMoneyAmount = 120000;
@@ -223,6 +224,27 @@ namespace Shop
 
                 cardIndex++;
             }
+
+            AppendNextTabButton();
+        }
+
+        private void AppendNextTabButton()
+        {
+            var nextTab = _activeTab switch
+            {
+                ShopTab.Offers => ShopTab.Money,
+                ShopTab.Money  => ShopTab.Coins,
+                _              => ShopTab.Offers
+            };
+
+            var btn = new Button(() => SwitchTab(nextTab));
+            btn.AddToClassList("next-tab-btn");
+            btn.text = "";
+
+            if (nextTabButtonSprite != null)
+                btn.style.backgroundImage = new StyleBackground(nextTabButtonSprite);
+
+            _itemsGrid.Add(btn);
         }
 
         // ── Event Handlers ────────────────────────────────────────────────

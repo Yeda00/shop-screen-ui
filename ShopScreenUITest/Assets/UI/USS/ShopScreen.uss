@@ -56,7 +56,8 @@
     -unity-font-style: bold;
     -unity-text-align: middle-left;
     letter-spacing: 2px;
-    /* Baloo font: assign via -unity-font-definition in code or set font asset */
+    -unity-text-outline-width: 3px;
+    -unity-text-outline-color: rgb(74, 35, 10);
 }
 
 /* ── Wallet ──────────────────────────────────────────────── */
@@ -204,4 +205,27 @@
     flex-wrap: wrap;
     align-content: flex-start;
     padding: 4px;
+    align-items: center;
+}
+
+/* ── Next Tab Button ──────────────────────────────────────── */
+
+.next-tab-btn {
+    width: 64px;
+    height: 110px;
+    margin-left: 10px;
+    flex-shrink: 0;
+    background-color: transparent;
+    border-width: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.next-tab-btn:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+    border-radius: 8px;
+}
+
+.next-tab-btn:active {
+    background-color: rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
 }

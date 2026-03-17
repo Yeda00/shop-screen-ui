@@ -340,7 +340,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2059666735
+--- !u!1 &878895128
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -348,9 +348,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2059666738}
-  - component: {fileID: 2059666737}
-  - component: {fileID: 2059666736}
+  - component: {fileID: 878895131}
+  - component: {fileID: 878895130}
+  - component: {fileID: 878895129}
   m_Layer: 0
   m_Name: ShopScreen
   m_TagString: Untagged
@@ -358,13 +358,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2059666736
+--- !u!114 &878895129
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059666735}
+  m_GameObject: {fileID: 878895128}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbb212dbfc7494d09944e6c6b3c685e6, type: 3}
@@ -373,20 +373,21 @@ MonoBehaviour:
   uiDocument: {fileID: 0}
   shopConfig: {fileID: 11400000, guid: bb261f46883c74785909ac496b6f912b, type: 2}
   shopItemCardTemplate: {fileID: 9197481963319205126, guid: 3e225b9f86efd4bf09607c49ce4ef272, type: 3}
+  offerItemCardTemplate: {fileID: 9197481963319205126, guid: cc0f7fbe25f1e034c8f3135c541c6718, type: 3}
   backgroundSprite: {fileID: -783677821495228623, guid: 243fc59c990b742c991bdb3ea84121bf, type: 3}
-  moneyIconSprite: {fileID: -3198225450090088125, guid: 54c7305a213ef47e68cd0572b4732c44, type: 3}
-  coinIconSprite: {fileID: -9032091246484857911, guid: 9fc62dc9769c24bb19951e3d4ee1470b, type: 3}
+  moneyWalletVector: {fileID: 7388822144124034973, guid: df7cd054c3d73bb42962a95d38aebb72, type: 3}
+  coinWalletVector: {fileID: 7388822144124034973, guid: fe8979da1ed35eb45be8b1ff745ac44f, type: 3}
   closeBtnSprite: {fileID: 8345206025797383307, guid: 6bf3235673f924a72b349c3533705028, type: 3}
   watchAdIconSprite: {fileID: -835913887158353787, guid: 0d218d0b31fcc4a18934b85c78208b1b, type: 3}
   initialMoneyAmount: 120000
   initialCoinAmount: 120000
---- !u!114 &2059666737
+--- !u!114 &878895130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059666735}
+  m_GameObject: {fileID: 878895128}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
@@ -403,13 +404,13 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
---- !u!4 &2059666738
+--- !u!4 &878895131
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059666735}
+  m_GameObject: {fileID: 878895128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -424,4 +425,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 2059666738}
+  - {fileID: 878895131}

@@ -1,0 +1,41 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="../USS/OfferItemCard.uss" />
+
+    <!--
+        OfferItemCard – card template for the Offers tab.
+        Supports two layouts, toggled by OfferItemCardBuilder:
+          • star-pass-content  → frame bg + centered chest image
+          • pack-content       → frame bg + 3 icon/label resource rows
+        The frame sprite is set on the root offer-card element.
+    -->
+    <ui:VisualElement name="offer-card" class="offer-card">
+
+        <!-- Transparent spacer that covers the colored header region of the frame -->
+        <ui:VisualElement name="header-spacer" class="offer-card__header-spacer" />
+
+        <!-- ── Star Pass layout ──────────────────────────────── -->
+        <ui:VisualElement name="star-pass-content" class="offer-card__star-pass-content">
+            <ui:VisualElement name="chest-image" class="offer-card__chest" />
+        </ui:VisualElement>
+
+        <!-- ── Resource Pack layout (Starter / Premium) ──────── -->
+        <ui:VisualElement name="pack-content" class="offer-card__pack-content">
+            <ui:VisualElement name="row-1" class="offer-card__row">
+                <ui:VisualElement name="row1-icon" class="offer-card__row-icon" />
+                <ui:Label name="row1-label" text="x0" class="offer-card__row-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="row-2" class="offer-card__row">
+                <ui:VisualElement name="row2-icon" class="offer-card__row-icon" />
+                <ui:Label name="row2-label" text="x0" class="offer-card__row-label" />
+            </ui:VisualElement>
+            <ui:VisualElement name="row-3" class="offer-card__row">
+                <ui:VisualElement name="row3-icon" class="offer-card__row-icon" />
+                <ui:Label name="row3-label" text="x0" class="offer-card__row-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ── Buy button (always visible) ───────────────────── -->
+        <ui:Button name="buy-btn" text="R$ 19,99" class="offer-card__buy-btn" />
+
+    </ui:VisualElement>
+</ui:UXML>

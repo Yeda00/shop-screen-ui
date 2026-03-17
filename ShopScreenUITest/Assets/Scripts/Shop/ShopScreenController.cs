@@ -23,13 +23,14 @@ namespace Shop
 
         [Header("Card Template")]
         [SerializeField] private VisualTreeAsset shopItemCardTemplate;
+        [SerializeField] private VisualTreeAsset offerItemCardTemplate;
 
         [Header("Background & Branding")]
         [SerializeField] private Sprite backgroundSprite;
 
-        [Header("Wallet Icons")]
-        [SerializeField] private Sprite moneyIconSprite;
-        [SerializeField] private Sprite coinIconSprite;
+        [Header("Wallet Frames (SVG)")]
+        [SerializeField] private VectorImage moneyWalletVector;
+        [SerializeField] private VectorImage coinWalletVector;
 
         [Header("Button Icons")]
         [SerializeField] private Sprite closeBtnSprite;
@@ -51,8 +52,8 @@ namespace Shop
         private Label          _coinAmountLabel;
         private VisualElement  _itemsGrid;
         private VisualElement  _shopBackground;
-        private VisualElement  _moneyWalletIcon;
-        private VisualElement  _coinWalletIcon;
+        private VisualElement  _moneyWallet;
+        private VisualElement  _coinWallet;
 
         private ShopTab _activeTab = ShopTab.Coins;
         private int     _moneyAmount;
@@ -71,8 +72,8 @@ namespace Shop
             _moneyAmountLabel = QueryElement<Label>("money-amount");
             _coinAmountLabel  = QueryElement<Label>("coin-amount");
             _shopBackground   = QueryElement<VisualElement>("shop-background");
-            _moneyWalletIcon  = QueryElement<VisualElement>("money-icon");
-            _coinWalletIcon   = QueryElement<VisualElement>("coin-icon");
+            _moneyWallet      = QueryElement<VisualElement>("money-wallet");
+            _coinWallet       = QueryElement<VisualElement>("coin-wallet");
 
             // items-grid lives inside the ScrollView (items-scroll)
             _itemsGrid = root.Q<VisualElement>("items-grid");
@@ -183,11 +184,23 @@ namespace Shop
             {
                 if (item == null) continue;
 
-                var card = ShopItemCardBuilder.Build(
-                    shopItemCardTemplate,
-                    item,
-                    watchAdIconSprite,
-                    OnItemPurchased);
+                VisualElement card;
+
+                if (_activeTab == ShopTab.Offers)
+                {
+                    card = OfferItemCardBuilder.Build(
+                        offerItemCardTemplate,
+                        item,
+                        OnItemPurchased);
+                }
+                else
+                {
+                    card = ShopItemCardBuilder.Build(
+                        shopItemCardTemplate,
+                        item,
+                        watchAdIconSprite,
+                        OnItemPurchased);
+                }
 
                 _itemsGrid.Add(card);
             }
@@ -222,16 +235,16 @@ namespace Shop
             if (backgroundSprite != null && _shopBackground != null)
                 _shopBackground.style.backgroundImage = new StyleBackground(backgroundSprite);
 
-            if (moneyIconSprite != null && _moneyWalletIcon != null)
-                _moneyWalletIcon.style.backgroundImage = new StyleBackground(moneyIconSprite);
+            if (moneyWalletVector != null && _moneyWallet != null)
+                _moneyWallet.style.backgroundImage = new StyleBackground(moneyWalletVector);
 
-            if (coinIconSprite != null && _coinWalletIcon != null)
-                _coinWalletIcon.style.backgroundImage = new StyleBackground(coinIconSprite);
+            if (coinWalletVector != null && _coinWallet != null)
+                _coinWallet.style.backgroundImage = new StyleBackground(coinWalletVector);
 
             if (closeBtnSprite != null && _closeBtn != null)
             {
                 _closeBtn.style.backgroundImage = new StyleBackground(closeBtnSprite);
-                _closeBtn.text = ""; // hide text when using image
+                _closeBtn.text = "";
             }
         }
 

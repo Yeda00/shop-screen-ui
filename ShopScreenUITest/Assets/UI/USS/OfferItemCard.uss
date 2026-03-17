@@ -1,0 +1,96 @@
+/* ============================================================
+   Offer Item Card - Component Styles
+   Used exclusively for the Offers tab cards.
+   Frame sprite is applied programmatically as background-image.
+   ============================================================ */
+
+@import url("ShopVariables.uss");
+
+/* ── Card Root ───────────────────────────────────────────── */
+
+.offer-card {
+    width: 170px;
+    height: 250px;
+    margin: 5px;
+    border-radius: var(--shop-radius-lg);
+    flex-direction: column;
+    overflow: hidden;
+    flex-shrink: 0;
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+/* ── Header Spacer (covers the colored top of the frame) ─── */
+
+.offer-card__header-spacer {
+    height: 58px;
+    flex-shrink: 0;
+}
+
+/* ── Star Pass Content ───────────────────────────────────── */
+
+.offer-card__star-pass-content {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.offer-card__chest {
+    width: 110px;
+    height: 100px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+/* ── Resource Pack Content ───────────────────────────────── */
+
+.offer-card__pack-content {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.offer-card__row {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+    width: 120px;
+}
+
+.offer-card__row-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    margin-right: 10px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.offer-card__row-label {
+    color: var(--shop-color-brown);
+    font-size: var(--shop-font-md);
+    -unity-font-style: bold;
+    -unity-text-align: middle-left;
+}
+
+/* ── Buy Button ──────────────────────────────────────────── */
+
+.offer-card__buy-btn {
+    flex-shrink: 0;
+    margin: 0 8px 8px 8px;
+    padding: 6px 8px;
+    background-color: var(--shop-color-green);
+    border-radius: var(--shop-radius-md);
+    border-width: 1px;
+    border-color: var(--shop-color-green-dark);
+    color: white;
+    font-size: var(--shop-font-sm);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.offer-card__buy-btn:hover {
+    background-color: rgb(55, 175, 60);
+}
+
+.offer-card__buy-btn:active {
+    background-color: var(--shop-color-green-dark);
+}

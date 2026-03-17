@@ -32,18 +32,16 @@
             <!-- Right: Wallets + Close -->
             <ui:VisualElement class="shop-header__right">
 
-                <!-- Money Wallet -->
+                <!-- Money Wallet (frame sprite set via code) -->
                 <ui:VisualElement name="money-wallet" class="wallet">
-                    <ui:VisualElement name="money-icon" class="wallet__icon" />
                     <ui:Label name="money-amount" text="0" class="wallet__amount" />
-                    <ui:Button name="add-money-btn" text="+" class="wallet__add-btn" />
+                    <ui:Button name="add-money-btn" text="" class="wallet__add-btn" />
                 </ui:VisualElement>
 
-                <!-- Coin Wallet -->
+                <!-- Coin Wallet (frame sprite set via code) -->
                 <ui:VisualElement name="coin-wallet" class="wallet">
-                    <ui:VisualElement name="coin-icon" class="wallet__icon" />
                     <ui:Label name="coin-amount" text="0" class="wallet__amount" />
-                    <ui:Button name="add-coin-btn" text="+" class="wallet__add-btn" />
+                    <ui:Button name="add-coin-btn" text="" class="wallet__add-btn" />
                 </ui:VisualElement>
 
                 <!-- Close -->

@@ -16,18 +16,53 @@ public static class ShopSetupWizard
     private const string OffersItemPathFmt  = "Assets/ScriptableObjects/Shop/Offers/OfferItem_{0}.asset";
     private const string ShopScreenUXML     = "Assets/UI/UXML/ShopScreen.uxml";
     private const string ShopItemCardUXML   = "Assets/UI/UXML/ShopItemCard.uxml";
+    private const string OfferItemCardUXML  = "Assets/UI/UXML/OfferItemCard.uxml";
+
+    [MenuItem("Shop/Repair Offer Card Types")]
+    public static void RepairOfferCardTypes()
+    {
+        var config = AssetDatabase.LoadAssetAtPath<ShopDataConfig>(ShopConfigPath);
+        if (config == null || config.offersItems == null)
+        {
+            Debug.LogWarning("[ShopSetupWizard] ShopDataConfig not found. Run Setup Shop Scene first.");
+            return;
+        }
+
+        // offersItems order: [0] StarPass, [1] StarterPack, [2] PremiumPack
+        var types = new[] { OfferCardType.StarPass, OfferCardType.ResourcePack, OfferCardType.ResourcePack };
+        var chestSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Test Assets/Chest.png");
+
+        for (int i = 0; i < config.offersItems.Length && i < types.Length; i++)
+        {
+            var item = config.offersItems[i];
+            if (item == null) continue;
+
+            var so = new SerializedObject(item);
+            so.FindProperty("offerCardType").enumValueIndex = (int)types[i];
+
+            if (types[i] == OfferCardType.StarPass && chestSprite != null)
+                so.FindProperty("centerSprite").objectReferenceValue = chestSprite;
+
+            so.ApplyModifiedProperties();
+            EditorUtility.SetDirty(item);
+        }
+
+        AssetDatabase.SaveAssets();
+        Debug.Log("[ShopSetupWizard] ✅ Offer card types repaired.");
+    }
 
     [MenuItem("Shop/Setup Shop Scene")]
     public static void SetupShopScene()
     {
         EnsureFolders();
 
-        var panelSettings = GetOrCreatePanelSettings();
-        var shopConfig    = GetOrCreateShopDataConfig();
-        var shopUxml      = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(ShopScreenUXML);
-        var cardUxml      = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(ShopItemCardUXML);
+        var panelSettings  = GetOrCreatePanelSettings();
+        var shopConfig     = GetOrCreateShopDataConfig();
+        var shopUxml       = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(ShopScreenUXML);
+        var cardUxml       = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(ShopItemCardUXML);
+        var offerCardUxml  = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(OfferItemCardUXML);
 
-        GetOrCreateShopUIDocumentObject(panelSettings, shopUxml, cardUxml, shopConfig);
+        GetOrCreateShopUIDocumentObject(panelSettings, shopUxml, cardUxml, offerCardUxml, shopConfig);
 
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
@@ -111,9 +146,9 @@ public static class ShopSetupWizard
         // Offer items
         config.offersItems = new ShopItemData[]
         {
-            CreateOfferItem(0, "offer_starter",  5000,  "Starter Pack",  "R$ 9,99",  PurchaseType.RealMoney),
-            CreateOfferItem(1, "offer_premium",  15000, "Premium Pack",  "R$ 24,99", PurchaseType.RealMoney),
-            CreateOfferItem(2, "offer_starpass", 50000, "Star Pass",     "R$ 49,99", PurchaseType.RealMoney),
+            CreateOfferItem(0, "offer_starpass", "Star Pass",    "R$ 19,99", OfferCardType.StarPass),
+            CreateOfferItem(1, "offer_starter",  "Starter Pack", "R$ 19,99", OfferCardType.ResourcePack),
+            CreateOfferItem(2, "offer_premium",  "Premium Pack", "R$ 19,99", OfferCardType.ResourcePack),
         };
 
         AssetDatabase.CreateAsset(config, ShopConfigPath);
@@ -155,20 +190,30 @@ public static class ShopSetupWizard
         return item;
     }
 
-    private static ShopItemData CreateOfferItem(int idx, string id, int amount, string display, string price, PurchaseType pType)
+    private static ShopItemData CreateOfferItem(int idx, string id, string display, string price, OfferCardType cardType)
     {
-        var path = string.Format(OffersItemPathFmt, idx);
+        var path     = string.Format(OffersItemPathFmt, idx);
         var existing = AssetDatabase.LoadAssetAtPath<ShopItemData>(path);
-        if (existing != null) return existing;
 
-        var item = ScriptableObject.CreateInstance<ShopItemData>();
-        item.productId     = id;
-        item.tab           = ShopTab.Offers;
-        item.amount        = amount;
-        item.amountDisplay = display;
-        item.priceDisplay  = price;
-        item.purchaseType  = pType;
-        AssetDatabase.CreateAsset(item, path);
+        ShopItemData item;
+        if (existing != null)
+        {
+            item = existing;
+        }
+        else
+        {
+            item               = ScriptableObject.CreateInstance<ShopItemData>();
+            item.productId     = id;
+            item.tab           = ShopTab.Offers;
+            item.amountDisplay = display;
+            item.priceDisplay  = price;
+            item.purchaseType  = PurchaseType.RealMoney;
+            AssetDatabase.CreateAsset(item, path);
+        }
+
+        // Always (re)apply the card type so existing assets are also updated
+        item.offerCardType = cardType;
+        EditorUtility.SetDirty(item);
         return item;
     }
 
@@ -178,6 +223,7 @@ public static class ShopSetupWizard
         PanelSettings panelSettings,
         VisualTreeAsset shopUxml,
         VisualTreeAsset cardUxml,
+        VisualTreeAsset offerCardUxml,
         ShopDataConfig shopConfig)
     {
         // Reuse existing if present
@@ -204,11 +250,12 @@ public static class ShopSetupWizard
 
         so.FindProperty("shopConfig")            .objectReferenceValue = shopConfig;
         so.FindProperty("shopItemCardTemplate")  .objectReferenceValue = cardUxml;
+        so.FindProperty("offerItemCardTemplate") .objectReferenceValue = offerCardUxml;
 
         // Try to auto-assign test sprites
-        TryAssignSprite(so, "backgroundSprite",  "Assets/Test Assets/Frame_OffersShopBG.png");
-        TryAssignSprite(so, "moneyIconSprite",   "Assets/Test Assets/Icon_HUD_Money.png");
-        TryAssignSprite(so, "coinIconSprite",    "Assets/Test Assets/Icon_HUD_Coin.png");
+        TryAssignSprite(so, "backgroundSprite",  "Assets/Test Assets/image_background.png");
+        TryAssignVector(so, "moneyWalletVector", "Assets/Test Assets/Group 570.svg");
+        TryAssignVector(so, "coinWalletVector",  "Assets/Test Assets/Group 620.svg");
         TryAssignSprite(so, "closeBtnSprite",    "Assets/Test Assets/Buttom_Close.png");
         TryAssignSprite(so, "watchAdIconSprite", "Assets/Test Assets/Buttom_Next.png");
 
@@ -230,6 +277,16 @@ public static class ShopSetupWizard
             so.FindProperty(propName).objectReferenceValue = sprite;
     }
 
+    private static void TryAssignVector(SerializedObject so, string propName, string assetPath)
+    {
+        var vector = AssetDatabase.LoadAssetAtPath<UnityEngine.UIElements.VectorImage>(assetPath);
+        if (vector != null)
+            so.FindProperty(propName).objectReferenceValue = vector;
+        else
+            Debug.LogWarning($"[ShopSetupWizard] VectorImage not found at {assetPath}. " +
+                             "Ensure 'com.unity.vectorgraphics' package is installed and the SVG was imported.");
+    }
+
     private static void AssignItemSprites(ShopDataConfig config)
     {
         if (config == null) return;
@@ -237,30 +294,62 @@ public static class ShopSetupWizard
         var coinSprite   = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Test Assets/Frame_ShopCoins.png");
         var moneySprite  = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Test Assets/Frame_ShopMoney.png");
         var coinIcon     = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Test Assets/Icon_HUD_Coin.png");
-        var moneyIcon    = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Test Assets/Icon_HUD_Money.png");
+        var moneyIcon    = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/UI/Icon_HUD_Money.png");
+        var hammerIcon   = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Test Assets/Icon_HUD_Hammer.png");
+        var chestSprite  = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Test Assets/Chest.png");
 
-        var offerSprites = new[]
+        SetItemSprites(config.coinItems,  coinSprite,  coinIcon);
+        SetItemSprites(config.moneyItems, moneySprite, moneyIcon);
+
+        if (config.offersItems == null) return;
+
+        // offersItems order: [0] StarPass, [1] StarterPack, [2] PremiumPack
+        var offerFrames = new[]
         {
+            AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Test Assets/Frame_StarPass.png"),
             AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Test Assets/Frame_StarterPack.png"),
             AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Test Assets/Frame_PremiumPack.png"),
-            AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Test Assets/Frame_StarPass.png"),
         };
 
-        SetItemSprites(config.coinItems,   coinSprite,  coinIcon);
-        SetItemSprites(config.moneyItems,  moneySprite, moneyIcon);
+        // Row label values per pack: [0]=StarPass (unused), [1]=StarterPack, [2]=PremiumPack
+        var moneyLabels = new[] { "", "x20",    "x50"   };
+        var coinLabels  = new[] { "", "x600",   "x2.500" };
 
-        if (config.offersItems != null)
+        for (int i = 0; i < config.offersItems.Length; i++)
         {
-            for (int i = 0; i < config.offersItems.Length; i++)
+            var item = config.offersItems[i];
+            if (item == null) continue;
+
+            var so = new SerializedObject(item);
+
+            if (i < offerFrames.Length && offerFrames[i] != null)
+                so.FindProperty("frameSprite").objectReferenceValue = offerFrames[i];
+
+            if (item.offerCardType == OfferCardType.StarPass)
             {
-                var item = config.offersItems[i];
-                if (item == null) continue;
-                var so = new SerializedObject(item);
-                if (i < offerSprites.Length && offerSprites[i] != null)
-                    so.FindProperty("itemSprite").objectReferenceValue = offerSprites[i];
-                so.FindProperty("currencyIconSprite").objectReferenceValue = coinIcon;
-                so.ApplyModifiedProperties();
+                if (chestSprite != null)
+                    so.FindProperty("centerSprite").objectReferenceValue = chestSprite;
             }
+            else // ResourcePack
+            {
+                if (hammerIcon != null)
+                {
+                    so.FindProperty("row1Icon").objectReferenceValue = hammerIcon;
+                    so.FindProperty("row1Label").stringValue = "x2";
+                }
+                if (moneyIcon != null)
+                {
+                    so.FindProperty("row2Icon").objectReferenceValue = moneyIcon;
+                    so.FindProperty("row2Label").stringValue = moneyLabels[i];
+                }
+                if (coinIcon != null)
+                {
+                    so.FindProperty("row3Icon").objectReferenceValue = coinIcon;
+                    so.FindProperty("row3Label").stringValue = coinLabels[i];
+                }
+            }
+
+            so.ApplyModifiedProperties();
         }
     }
 

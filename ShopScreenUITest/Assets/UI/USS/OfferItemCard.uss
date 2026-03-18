@@ -1,12 +1,6 @@
-/* ============================================================
-   Offer Item Card - Component Styles
-   Used exclusively for the Offers tab cards.
-   Frame sprite is applied programmatically as background-image.
-   ============================================================ */
+/* Offer Item Card - Component Styles (Offers tab only) */
 
 @import url("ShopVariables.uss");
-
-/* ── Card Root ───────────────────────────────────────────── */
 
 .offer-card {
     width: 170px;
@@ -30,8 +24,7 @@
     translate: 0px 24px;
 }
 
-/* ── Header Spacer (covers the colored top of the frame) ─── */
-
+/* Spacer that fills the coloured header band of the frame sprite */
 .offer-card__header-spacer {
     height: 58px;
     flex-shrink: 0;
@@ -39,20 +32,15 @@
     justify-content: center;
 }
 
-/* ── Título do pack (STAR PASS / STARTER PACK / PREMIUM PACK) */
-
 .offer-card__title {
     color: white;
     -unity-font-style: bold;
     -unity-text-align: middle-center;
-    /* font-size definido via C# (22px Star Pass / 18px demais) */
+    /* font-size set via C#: 22px for StarPass, 18px for ResourcePack */
     white-space: normal;
-    /* Limita à largura do header para não extrapolar */
     width: 100%;
     padding: 0 6px;
 }
-
-/* ── Star Pass Content ───────────────────────────────────── */
 
 .offer-card__star-pass-content {
     flex: 1;
@@ -65,8 +53,6 @@
     height: 100px;
     -unity-background-scale-mode: scale-to-fit;
 }
-
-/* ── Resource Pack Content ───────────────────────────────── */
 
 .offer-card__pack-content {
     flex: 1;
@@ -99,13 +85,11 @@
     min-width: 48px;
 }
 
-/* ── Buy Button ──────────────────────────────────────────── */
-
 .offer-card__buy-btn {
     flex-shrink: 0;
     margin: 0 8px 8px 8px;
     padding: 6px 8px;
-    /* Sprite Buttom Frame_Green.png aplicado via C# — sem CSS de cor */
+    /* Sprite Buttom Frame_Green.png applied via C# */
     background-color: transparent;
     border-width: 0;
     -unity-background-scale-mode: stretch-to-fill;

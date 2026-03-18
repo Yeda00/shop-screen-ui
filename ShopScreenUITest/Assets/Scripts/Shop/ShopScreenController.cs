@@ -4,20 +4,8 @@ using UnityEngine.UIElements;
 
 namespace Shop
 {
-    /// <summary>
-    /// Controller for the Shop overlay screen.
-    /// Extends UIScreenBase (provides UIDocument wiring, RegisterScreen lifecycle).
-    ///
-    /// Responsibilities:
-    ///   - Tab switching (Offers / Money / Coins)
-    ///   - Procedural grid population via ShopItemCardBuilder
-    ///   - Mock purchase / watch-ad interactions (Debug.Log)
-    ///   - Wallet display updates
-    /// </summary>
     public class ShopScreenController : UIScreenBase
     {
-        // ── Inspector ────────────────────────────────────────────────────
-
         [Header("Shop Data")]
         [SerializeField] private ShopDataConfig shopConfig;
 
@@ -43,8 +31,6 @@ namespace Shop
         [SerializeField] private int initialMoneyAmount = 120000;
         [SerializeField] private int initialCoinAmount  = 120000;
 
-        // ── Private fields ────────────────────────────────────────────────
-
         private Button         _tabOffersBtn;
         private Button         _tabMoneyBtn;
         private Button         _tabCoinsBtn;
@@ -62,8 +48,6 @@ namespace Shop
         private int     _moneyAmount;
         private int     _coinAmount;
 
-        // ── UIScreenBase overrides ────────────────────────────────────────
-
         protected override void InitializeUIElements()
         {
             _tabOffersBtn     = QueryElement<Button>("tab-offers");
@@ -78,7 +62,6 @@ namespace Shop
             _moneyWallet      = QueryElement<VisualElement>("money-wallet");
             _coinWallet       = QueryElement<VisualElement>("coin-wallet");
 
-            // items-grid lives inside the ScrollView (items-scroll)
             _itemsGrid = root.Q<VisualElement>("items-grid");
 
             ApplySprites();
@@ -112,23 +95,17 @@ namespace Shop
                 UINavigationController.UnregisterScreen(Screens.Shop);
         }
 
-        // ── Public API ───────────────────────────────────────────────────
-
-        /// <summary>Update the displayed money balance.</summary>
         public void SetMoneyAmount(int amount)
         {
             _moneyAmount = amount;
             RefreshWalletLabels();
         }
 
-        /// <summary>Update the displayed coin balance.</summary>
         public void SetCoinAmount(int amount)
         {
             _coinAmount = amount;
             RefreshWalletLabels();
         }
-
-        // ── Tab Logic ─────────────────────────────────────────────────────
 
         private void SwitchTab(ShopTab tab)
         {
@@ -157,12 +134,6 @@ namespace Shop
             };
         }
 
-        // ── Grid Population ───────────────────────────────────────────────
-
-        /// <summary>
-        /// Clears the current grid and rebuilds it procedurally from <paramref name="items"/>.
-        /// Each card is created via ShopItemCardBuilder (SRP / DIP).
-        /// </summary>
         private void PopulateGrid(ShopItemData[] items)
         {
             if (_itemsGrid == null)
@@ -213,7 +184,7 @@ namespace Shop
                     innerName = "item-card";
                 }
 
-                // Entrance animation: start hidden/translated, then remove class after a staggered delay
+                // Entrance animation: staggered per card, class removed after one frame delay
                 var innerCard = card.Q<VisualElement>(innerName);
                 innerCard?.AddToClassList(innerName + "--entering");
                 _itemsGrid.Add(card);
@@ -250,19 +221,17 @@ namespace Shop
             _itemsGrid.Add(btn);
         }
 
-        // ── Event Handlers ────────────────────────────────────────────────
-
         private void OnItemPurchased(ShopItemData item)
         {
             if (item.purchaseType == PurchaseType.WatchAd)
             {
-                Debug.Log($"[ShopScreen] 📺 Watch ad → reward: {item.amountDisplay} {item.tab} (id: {item.productId})");
+                Debug.Log($"[ShopScreen] WatchAd: {item.amountDisplay} {item.tab} (id: {item.productId})");
                 AddToWallet(item);
                 // TODO: trigger rewarded ad via IAdProvider
             }
             else
             {
-                Debug.Log($"[ShopScreen] 💳 Purchase → product: {item.productId} | amount: {item.amountDisplay} | price: {item.priceDisplay}");
+                Debug.Log($"[ShopScreen] Purchase: {item.productId} | {item.amountDisplay} | {item.priceDisplay}");
                 AddToWallet(item);
                 // TODO: trigger IAP via IIAPService
             }
@@ -284,11 +253,8 @@ namespace Shop
 
         private void OnClose()
         {
-            Debug.Log("[ShopScreen] ✕ Close pressed.");
             UINavigationController.GoBack();
         }
-
-        // ── Helpers ───────────────────────────────────────────────────────
 
         private void ApplySprites()
         {

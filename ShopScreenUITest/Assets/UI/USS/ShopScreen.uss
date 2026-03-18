@@ -1,11 +1,6 @@
-/* ============================================================
-   Shop Screen - Layout & Component Styles
-   Target: Unity UI Toolkit (Landscape)
-   ============================================================ */
+/* Shop Screen - Layout & Component Styles */
 
 @import url("ShopVariables.uss");
-
-/* ── Root ────────────────────────────────────────────────── */
 
 .shop-root {
     position: absolute;
@@ -13,13 +8,11 @@
     flex-direction: column;
 }
 
-/* ── Background ──────────────────────────────────────────── */
-
 .shop-background {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     -unity-background-scale-mode: scale-and-crop;
-    background-color: rgb(37, 80, 55); /* fallback if sprite not set */
+    background-color: rgb(37, 80, 55); /* fallback if sprite not assigned */
 }
 
 .shop-overlay {
@@ -27,8 +20,6 @@
     top: 0; left: 0; right: 0; bottom: 0;
     background-color: var(--shop-color-overlay);
 }
-
-/* ── Header ──────────────────────────────────────────────── */
 
 .shop-header {
     flex-direction: row;
@@ -48,8 +39,6 @@
     align-items: center;
 }
 
-/* ── Title ───────────────────────────────────────────────── */
-
 .shop-title {
     color: var(--shop-color-beige);
     font-size: var(--shop-font-xl);
@@ -60,18 +49,13 @@
     -unity-text-outline-color: rgb(74, 35, 10);
 }
 
-/* ── Wallet ──────────────────────────────────────────────── */
-
 .wallet {
     flex-direction: row;
     align-items: center;
     /*
-     * SVG layout (Group 570 / Group 620):
-     *   left  ~38% = icon overhang  → padding-left accounts for this
-     *   right ~14% = + button area  → padding-right keeps text from covering it
-     *
-     * NOTA SVG: scale-to-fit evita distorção em VectorImage complexo.
-     * Se o SVG ainda aparecer bugado, considere exportar como PNG/Sprite.
+     * SVG (Group 570 / Group 620) has an icon overhang on the left (~38%)
+     * and a + button area on the right (~14%). Padding offsets text from both.
+     * scale-to-fit prevents distortion on complex VectorImage assets.
      */
     padding: 2px 34px 2px 46px;
     margin-right: 8px;
@@ -90,7 +74,7 @@
     flex: 1;
 }
 
-/* The + button is drawn by the SVG; this is just the invisible click target */
+/* The + button is rendered by the SVG; this element is just the invisible hit target */
 .wallet__add-btn {
     position: absolute;
     right: 2px;
@@ -111,8 +95,6 @@
 .wallet__add-btn:active {
     background-color: rgba(0,0,0,0.15);
 }
-
-/* ── Close Button ────────────────────────────────────────── */
 
 .close-btn {
     width: 44px;
@@ -137,15 +119,11 @@
     background-color: rgb(169, 50, 38);
 }
 
-/* ── Divider ─────────────────────────────────────────────── */
-
 .shop-divider {
     height: 1px;
     background-color: rgba(255, 255, 255, 0.12);
     margin: 0 16px;
 }
-
-/* ── Main Content ────────────────────────────────────────── */
 
 .shop-content {
     flex-direction: row;
@@ -154,19 +132,17 @@
     overflow: hidden;
 }
 
-/* ── Tab Navigation ──────────────────────────────────────── */
-
 .tab-nav {
     flex-direction: column;
     width: 154px;
     margin-right: 18px;
     margin-top: 68px;
-    justify-content: flex-start;  
+    justify-content: flex-start;
     flex-shrink: 0;
 }
 
 .tab-btn {
-    /* Sprite Frame_HUD Buttons.png aplicado via C# */
+    /* Sprite Frame_HUD Buttons.png applied via C# */
     background-color: transparent;
     border-width: 0;
     -unity-background-scale-mode: stretch-to-fill;
@@ -178,22 +154,18 @@
     width: 148px;
     height: 38px;
     -unity-text-align: middle-center;
-    /* Inativo: semi-transparente */
     opacity: 0.5;
     transition-property: opacity;
     transition-duration: 0.15s;
 }
 
 .tab-btn--active {
-    /* Ativo: opacidade total */
     opacity: 1.0;
 }
 
 .tab-btn:hover {
     opacity: 0.75;
 }
-
-/* ── Items Container (ScrollView) ────────────────────────── */
 
 .items-scroll {
     flex: 1;
@@ -207,8 +179,6 @@
     padding: 4px;
     align-items: center;
 }
-
-/* ── Next Tab Button ──────────────────────────────────────── */
 
 .next-tab-btn {
     width: 64px;

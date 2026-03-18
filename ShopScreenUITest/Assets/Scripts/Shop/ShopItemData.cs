@@ -2,9 +2,6 @@ using UnityEngine;
 
 namespace Shop
 {
-    /// <summary>
-    /// Which tab this item belongs to.
-    /// </summary>
     public enum ShopTab
     {
         Offers,
@@ -12,18 +9,12 @@ namespace Shop
         Coins
     }
 
-    /// <summary>
-    /// How the player acquires this item.
-    /// </summary>
     public enum PurchaseType
     {
         RealMoney,  // In-App Purchase
         WatchAd     // Rewarded ad (free)
     }
 
-    /// <summary>
-    /// Layout variant for cards in the Offers tab.
-    /// </summary>
     public enum OfferCardType
     {
         Default,      // not an offer card
@@ -31,10 +22,6 @@ namespace Shop
         ResourcePack  // frame + 3 icon/label rows (Starter Pack, Premium Pack, etc.)
     }
 
-    /// <summary>
-    /// Data model for a single shop item.
-    /// Create via Assets → Create → Shop → Shop Item.
-    /// </summary>
     [CreateAssetMenu(fileName = "ShopItem", menuName = "Shop/Shop Item")]
     public class ShopItemData : ScriptableObject
     {

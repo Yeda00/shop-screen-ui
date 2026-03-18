@@ -1,12 +1,10 @@
-/* ============================================================
-   Shop Item Card - Component Styles
-   Layout: frame sprite como background. coin-row e footer
-   são position:absolute → ajuste independente sem interferência.
-   ============================================================ */
+/*
+ * Shop Item Card - Component Styles
+ * coin-row and footer use position:absolute so their positions are
+ * independent and can be tuned per-tab without affecting each other.
+ */
 
 @import url("ShopVariables.uss");
-
-/* ── Card Container ──────────────────────────────────────── */
 
 .item-card {
     width: 160px;
@@ -30,8 +28,6 @@
     translate: 0px 24px;
 }
 
-/* ── Strip de valor (coin-row) — layout base ─────────────── */
-
 .item-card__coin-row {
     position: absolute;
     height: 30px;
@@ -42,11 +38,8 @@
 }
 
 /*
- * ── Coins tab ──────────────────────────────────────────────
- * Ajuste AQUI para os cards de Coins (Frame_ShopCoins.png).
- * top      → posição vertical do texto
- * left/right → largura da área do texto
- * padding-left → recuo horizontal (não sobrepor ícone do frame)
+ * Coins tab (Frame_ShopCoins.png):
+ * padding-left clears the coin icon embedded in the frame sprite.
  */
 .item-card__coin-row--coins {
     top: 85px;
@@ -57,9 +50,8 @@
 }
 
 /*
- * ── Money tab ──────────────────────────────────────────────
- * Ajuste AQUI para os cards de Money (Frame_ShopMoney.png).
- * Valores independentes dos Coins — não interferem entre si.
+ * Money tab (Frame_ShopMoney.png):
+ * Independent values — does not affect Coins layout.
  */
 .item-card__coin-row--money {
     top: 82px;
@@ -77,14 +69,8 @@
     flex: 1;
 }
 
-/* ── Footer (apenas botão) ───────────────────────────────── */
-
 .item-card__footer {
     position: absolute;
-    /*
-     * ↕ Ajuste APENAS este `bottom` para mover o botão verticalmente
-     *   sem afetar o texto do valor.
-     */
     bottom: 0;
     left: 0;
     right: 0;
@@ -92,13 +78,11 @@
     background-color: transparent;
 }
 
-/* ── Buy Button ──────────────────────────────────────────── */
-
 .item-card__buy-btn {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    /* Sprite Buttom Frame_Green.png aplicado via C# — sem CSS de cor */
+    /* Sprite Buttom Frame_Green.png applied via C# */
     background-color: transparent;
     border-width: 0;
     -unity-background-scale-mode: stretch-to-fill;
@@ -117,13 +101,9 @@
     background-color: rgba(0, 0, 0, 0.15);
 }
 
-/* ── Watch Ad Button (modifier) ──────────────────────────── */
-
 .item-card__buy-btn--watch {
-    /* herda estilos base do buy-btn */
+    /* inherits base buy-btn styles */
 }
-
-/* ── Watch Icon (injetado pelo builder em itens WatchAd) ─── */
 
 .item-card__watch-icon {
     width: 18px;

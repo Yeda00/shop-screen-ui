@@ -4,22 +4,8 @@ using UnityEngine.UIElements;
 
 namespace Shop
 {
-    /// <summary>
-    /// Stateless factory that builds a shop item card VisualElement
-    /// from a UXML template and a ShopItemData instance.
-    ///
-    /// Single Responsibility: only knows how to turn data into a card.
-    /// </summary>
     public static class ShopItemCardBuilder
     {
-        /// <summary>
-        /// Instantiates the card template and populates it with <paramref name="data"/>.
-        /// </summary>
-        /// <param name="template">ShopItemCard.uxml asset.</param>
-        /// <param name="data">Item to display.</param>
-        /// <param name="watchIconSprite">Icon shown on the button for WatchAd items.</param>
-        /// <param name="onBuyClicked">Callback invoked when the CTA button is pressed.</param>
-        /// <returns>Root VisualElement of the populated card.</returns>
         public static VisualElement Build(
             VisualTreeAsset template,
             ShopItemData data,
@@ -42,13 +28,11 @@ namespace Shop
             return card;
         }
 
-        // ── Helpers ──────────────────────────────────────────────────────
-
         private static void SetImage(VisualElement card, ShopItemData data)
         {
-            // O frame sprite (Frame_ShopMoney.png / Frame_ShopCoins.png) é aplicado
-            // como backgroundImage do root do card — o frame integra visualmente
-            // o produto, a strip de moeda e o fundo bege, sem precisar de card-image.
+            // Frame sprite (Frame_ShopMoney / Frame_ShopCoins) is applied as the card's
+            // backgroundImage — it composites the product art, currency strip and beige
+            // background into a single asset, so no separate card-image element is needed.
             var itemCard = card.Q<VisualElement>("item-card");
             if (itemCard == null) return;
 
@@ -64,8 +48,7 @@ namespace Shop
                     ? data.amount.ToString("N0")
                     : data.amountDisplay;
 
-            // Adiciona classe modificadora ao coin-row para posicionamento
-            // independente por tab — ajuste top/padding no USS sem interferência.
+            // Modifier class keeps Money and Coins positions independent — adjust in USS only.
             var coinRow = card.Q<VisualElement>("coin-row");
             if (coinRow != null)
             {
@@ -90,7 +73,6 @@ namespace Shop
 
             if (data.purchaseType == PurchaseType.WatchAd)
             {
-                // Limpa o texto nativo do botão — layout vai ser feito com filhos
                 buyBtn.text = "";
                 buyBtn.AddToClassList("item-card__buy-btn--watch");
 

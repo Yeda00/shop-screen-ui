@@ -4,14 +4,6 @@ using UnityEngine.UIElements;
 
 namespace Shop
 {
-    /// <summary>
-    /// Stateless factory that builds an Offer card VisualElement
-    /// from the OfferItemCard UXML template and a ShopItemData instance.
-    ///
-    /// Supports two layouts driven by ShopItemData.offerCardType:
-    ///   • StarPass     → frame background + centered chest image
-    ///   • ResourcePack → frame background + 3 icon/label rows
-    /// </summary>
     public static class OfferItemCardBuilder
     {
         public static VisualElement Build(
@@ -36,8 +28,6 @@ namespace Shop
             return card;
         }
 
-        // ── Helpers ──────────────────────────────────────────────────────
-
         private static void SetTitle(VisualElement card, ShopItemData data)
         {
             var title = card.Q<Label>("offer-title");
@@ -45,10 +35,9 @@ namespace Shop
 
             title.text = string.IsNullOrEmpty(data.cardTitle) ? string.Empty : data.cardTitle;
 
-            // Star Pass: 22px | demais packs: 18px
+            // StarPass uses larger text and a dark brown to match its light frame background.
+            // ResourcePacks use smaller text and beige to sit on the dark frame.
             title.style.fontSize = data.offerCardType == OfferCardType.StarPass ? 22f : 18f;
-
-            // Star Pass: #5F3124 | Resource Packs: #E4DDB5
             title.style.color = data.offerCardType == OfferCardType.StarPass
                 ? new StyleColor(new Color32(0x5F, 0x31, 0x24, 0xFF))
                 : new StyleColor(new Color32(0xE4, 0xDD, 0xB5, 0xFF));
@@ -70,7 +59,6 @@ namespace Shop
 
             if (data.offerCardType == OfferCardType.StarPass)
             {
-                // Show star pass, hide pack
                 if (packContent     != null) packContent.style.display     = DisplayStyle.None;
                 if (starPassContent != null) starPassContent.style.display = DisplayStyle.Flex;
 
@@ -78,9 +66,8 @@ namespace Shop
                 if (chestImage != null && data.centerSprite != null)
                     chestImage.style.backgroundImage = new StyleBackground(data.centerSprite);
             }
-            else // ResourcePack (default)
+            else
             {
-                // Show pack, hide star pass
                 if (starPassContent != null) starPassContent.style.display = DisplayStyle.None;
                 if (packContent     != null) packContent.style.display     = DisplayStyle.Flex;
 

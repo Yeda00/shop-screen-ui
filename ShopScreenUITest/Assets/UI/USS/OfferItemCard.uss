@@ -72,19 +72,20 @@
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
+    padding: 0 16px;
 }
 
 .offer-card__row {
     flex-direction: row;
     align-items: center;
-    margin-bottom: 8px;
-    width: 120px;
+    justify-content: center;
+    margin-bottom: 2px;
 }
 
 .offer-card__row-icon {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     flex-shrink: 0;
     margin-right: 10px;
     -unity-background-scale-mode: scale-to-fit;
@@ -95,6 +96,7 @@
     font-size: var(--shop-font-md);
     -unity-font-style: bold;
     -unity-text-align: middle-left;
+    min-width: 48px;
 }
 
 /* ── Buy Button ──────────────────────────────────────────── */

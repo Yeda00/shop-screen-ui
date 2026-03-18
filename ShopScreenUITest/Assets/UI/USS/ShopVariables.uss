@@ -4,6 +4,7 @@
    ============================================================ */
 
 :root {
+
     /* --- Color Palette --- */
     --shop-color-brown:      rgb(137, 86, 55);   /* Marron Padrão  */
     --shop-color-beige:      rgb(228, 221, 181);  /* Bege Creme     */

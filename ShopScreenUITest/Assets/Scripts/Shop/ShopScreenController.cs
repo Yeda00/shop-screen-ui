@@ -96,7 +96,8 @@ namespace Shop
 
         protected override void OnScreenEnabled()
         {
-            UINavigationController.RegisterScreen(Screens.Shop, root);
+            if (Application.isPlaying)
+                UINavigationController.RegisterScreen(Screens.Shop, root);
 
             _moneyAmount = initialMoneyAmount;
             _coinAmount  = initialCoinAmount;
@@ -107,7 +108,8 @@ namespace Shop
 
         protected override void OnScreenDisabled()
         {
-            UINavigationController.UnregisterScreen(Screens.Shop);
+            if (Application.isPlaying)
+                UINavigationController.UnregisterScreen(Screens.Shop);
         }
 
         // ── Public API ───────────────────────────────────────────────────
@@ -226,6 +228,7 @@ namespace Shop
             }
 
             AppendNextTabButton();
+            ApplyFontToTree(_itemsGrid);
         }
 
         private void AppendNextTabButton()
@@ -254,13 +257,29 @@ namespace Shop
             if (item.purchaseType == PurchaseType.WatchAd)
             {
                 Debug.Log($"[ShopScreen] 📺 Watch ad → reward: {item.amountDisplay} {item.tab} (id: {item.productId})");
+                AddToWallet(item);
                 // TODO: trigger rewarded ad via IAdProvider
             }
             else
             {
                 Debug.Log($"[ShopScreen] 💳 Purchase → product: {item.productId} | amount: {item.amountDisplay} | price: {item.priceDisplay}");
+                AddToWallet(item);
                 // TODO: trigger IAP via IIAPService
             }
+        }
+
+        private void AddToWallet(ShopItemData item)
+        {
+            switch (item.tab)
+            {
+                case ShopTab.Money:
+                    _moneyAmount += item.amount;
+                    break;
+                case ShopTab.Coins:
+                    _coinAmount += item.amount;
+                    break;
+            }
+            RefreshWalletLabels();
         }
 
         private void OnClose()

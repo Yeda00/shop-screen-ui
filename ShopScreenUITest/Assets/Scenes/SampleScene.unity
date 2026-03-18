@@ -371,6 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shop.ShopScreenController
   uiDocument: {fileID: 0}
+  globalFont: {fileID: 12800000, guid: 499d4a47980214b33a0e3dcddfebe134, type: 3}
   shopConfig: {fileID: 11400000, guid: bb261f46883c74785909ac496b6f912b, type: 2}
   shopItemCardTemplate: {fileID: 9197481963319205126, guid: 3e225b9f86efd4bf09607c49ce4ef272, type: 3}
   offerItemCardTemplate: {fileID: 9197481963319205126, guid: cc0f7fbe25f1e034c8f3135c541c6718, type: 3}
@@ -378,9 +379,9 @@ MonoBehaviour:
   moneyWalletVector: {fileID: 7388822144124034973, guid: df7cd054c3d73bb42962a95d38aebb72, type: 3}
   coinWalletVector: {fileID: 7388822144124034973, guid: fe8979da1ed35eb45be8b1ff745ac44f, type: 3}
   closeBtnSprite: {fileID: 8345206025797383307, guid: 6bf3235673f924a72b349c3533705028, type: 3}
-  watchAdIconSprite: {fileID: -835913887158353787, guid: 0d218d0b31fcc4a18934b85c78208b1b, type: 3}
+  watchAdIconSprite: {fileID: 16401971394083574, guid: c8343824855ac418686d7b8c6a6481c4, type: 3}
   buyButtonSprite: {fileID: 3758585067948155059, guid: db14d91529e98461cac303a210422e38, type: 3}
-  tabButtonSprite: {fileID: -6500375927547481642, guid: 2153c1100071d4a87b406bda2f47f35f, type: 3}
+  tabButtonSprite: {fileID: 8709340439519857776, guid: af2e9329117464ec397b89e69a7059ab, type: 3}
   nextTabButtonSprite: {fileID: -835913887158353787, guid: 0d218d0b31fcc4a18934b85c78208b1b, type: 3}
   initialMoneyAmount: 120000
   initialCoinAmount: 120000

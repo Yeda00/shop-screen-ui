@@ -7,11 +7,13 @@ namespace Common.UI
     /// Base class for all UI screens.
     /// Provides common functionality for UI document management and element initialization.
     /// </summary>
+    [ExecuteAlways]
     [RequireComponent(typeof(UIDocument))]
     public abstract class UIScreenBase : MonoBehaviour
     {
         [Header("UI Document")]
         [SerializeField] protected UIDocument uiDocument;
+        [SerializeField] protected Font globalFont;
 
         protected VisualElement root;
 
@@ -38,8 +40,14 @@ namespace Common.UI
             }
 
             InitializeUIElements();
-            RegisterCallbacks();
+
+            if (Application.isPlaying)
+                RegisterCallbacks();
+
             OnScreenEnabled();
+
+            if (globalFont != null)
+                ApplyFontToTree(root);
         }
 
         protected virtual void OnDisable()
@@ -77,6 +85,18 @@ namespace Common.UI
         /// Override this for screen-specific cleanup logic.
         /// </summary>
         protected virtual void OnScreenDisabled() { }
+
+        /// <summary>
+        /// Recursively applies globalFont to every element in the given subtree.
+        /// Call this after dynamically adding elements to the visual tree.
+        /// </summary>
+        protected void ApplyFontToTree(VisualElement element)
+        {
+            if (element == null || globalFont == null) return;
+            element.style.unityFontDefinition = new StyleFontDefinition(FontDefinition.FromFont(globalFont));
+            foreach (var child in element.Children())
+                ApplyFontToTree(child);
+        }
 
         /// <summary>
         /// Helper method to safely query UI elements with error logging.

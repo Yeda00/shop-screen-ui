@@ -160,8 +160,8 @@
     flex-direction: column;
     width: 154px;
     margin-right: 18px;
-    justify-content: flex-start;
-    padding-top: 4px;
+    margin-top: 68px;
+    justify-content: flex-start;  
     flex-shrink: 0;
 }
 

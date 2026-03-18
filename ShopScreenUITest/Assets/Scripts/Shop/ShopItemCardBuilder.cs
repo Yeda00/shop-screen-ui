@@ -90,16 +90,21 @@ namespace Shop
 
             if (data.purchaseType == PurchaseType.WatchAd)
             {
+                // Limpa o texto nativo do botão — layout vai ser feito com filhos
+                buyBtn.text = "";
+                buyBtn.AddToClassList("item-card__buy-btn--watch");
+
                 if (watchIconSprite != null)
                 {
                     var icon = new VisualElement();
                     icon.AddToClassList("item-card__watch-icon");
                     icon.style.backgroundImage = new StyleBackground(watchIconSprite);
-                    buyBtn.Insert(0, icon);
+                    buyBtn.Add(icon);
                 }
 
-                buyBtn.text = " WATCH";
-                buyBtn.AddToClassList("item-card__buy-btn--watch");
+                var label = new Label("WATCH");
+                label.AddToClassList("item-card__watch-label");
+                buyBtn.Add(label);
             }
             else
             {

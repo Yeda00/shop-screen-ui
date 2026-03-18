@@ -47,6 +47,11 @@ namespace Shop
 
             // Star Pass: 22px | demais packs: 18px
             title.style.fontSize = data.offerCardType == OfferCardType.StarPass ? 22f : 18f;
+
+            // Star Pass: #5F3124 | Resource Packs: #E4DDB5
+            title.style.color = data.offerCardType == OfferCardType.StarPass
+                ? new StyleColor(new Color32(0x5F, 0x31, 0x24, 0xFF))
+                : new StyleColor(new Color32(0xE4, 0xDD, 0xB5, 0xFF));
         }
 
         private static void SetFrame(VisualElement card, ShopItemData data)

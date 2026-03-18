@@ -12,7 +12,15 @@
       "Bash(curl:*)",
       "mcp__plugin_figma_figma__get_metadata",
       "mcp__plugin_figma_figma__get_design_context",
-      "mcp__plugin_figma_figma__get_screenshot"
+      "mcp__plugin_figma_figma__get_screenshot",
+      "mcp__UnityMCP__create_script",
+      "mcp__UnityMCP__read_console",
+      "mcp__UnityMCP__execute_menu_item",
+      "mcp__UnityMCP__manage_script",
+      "mcp__UnityMCP__find_gameobjects",
+      "mcp__UnityMCP__manage_ui",
+      "mcp__UnityMCP__refresh_unity",
+      "mcp__UnityMCP__manage_components"
     ]
   }
 }
